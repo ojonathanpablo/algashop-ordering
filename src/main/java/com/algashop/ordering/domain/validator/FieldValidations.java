@@ -7,7 +7,8 @@ import java.util.Objects;
 
 public class FieldValidations {
 
-    private FieldValidations() {}
+    private FieldValidations() {
+    }
 
     public static void requiresValidEmail(String email) {
         requiresValidEmail(email, null);
@@ -20,6 +21,17 @@ public class FieldValidations {
         }
         if (!EmailValidator.getInstance().isValid(email)) {
             throw new IllegalArgumentException(errorMessage);
+        }
+    }
+
+    public static void requiresNonBlank(String value) {
+        requiresNonBlanck(value, " ");
+    }
+
+    public static void requiresNonBlanck(String value, String errorMessage) {
+        Objects.requireNonNull(value);
+        if (value.isBlank()) {
+            throw new IllegalArgumentException();
         }
     }
 }
